@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function initialize() {
+            messageOutput = document.getElementById("output");
+            message = "Total: ";
+        }
+        function display() {
+            messageOutput.innerHTML = message;
+        }
+        function addCoins() {
+            
+            display();
+        }
+    </script>
+</head>
+<body onload="initialize();">
+    <h1>Count de Money</h1>
+    <h4>Bask in my riches and count my coppers and silvers and golds! Endless coins shall fall in your grasp!
+        <br>-Rich Old Man</h4>
+    <br>
+    <p id = "output">Total: </p>
+    <br>
+    <div class="buttons">
+        <button class="button">Add 1&#162;</button>
+        <button class="button">Subtract 1&#162;</button>
+        <button class="button">Add 5&#162;</button>
+        <button class="button">Subtract 5&#162;</button>
+        <button class="button">Add 10&#162;</button>
+        <button class="button">Subtract 10&#162;</button>
+        <button class="button">Add 25&#162;</button>
+        <button class="button">Subtract 25&#162;</button>
+    </div>
+
+</body>
+</html>
