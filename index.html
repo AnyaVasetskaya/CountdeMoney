@@ -8,34 +8,115 @@
     <script>
         function initialize() {
             messageOutput = document.getElementById("output");
-            message = "Total: ";
+            numPenniesOutput = document.getElementById("numPennies");
+            numNickelsOutput = document.getElementById("numNickels");
+            numDimesOutput = document.getElementById("numDimes");
+            numQuartersOutput = document.getElementById("numQuarters");
+            pSumOutput = document.getElementById("pSum");
+            nSumOutput = document.getElementById("nSum");
+            dSumOutput = document.getElementById("dSum");
+            qSumOutput = document.getElementById("qSum");
+            sum = 0;
+            numPennies = 0;
+            numNickels = 0;
+            numDimes = 0;
+            numQuarters = 0;
+            pSum = 0;
+            nSum = 0;
+            dSum = 0;
+            qSum = 0;
         }
         function display() {
-            messageOutput.innerHTML = message;
+            sum = Math.round(sum * 100) / 100;
+            pSum = Math.round(pSum * 100) / 100;
+            nSum = Math.round(nSum * 100) / 100;
+            dSum = Math.round(dSum * 100) / 100;
+            qSum = Math.round(qSum * 100) / 100;
+            messageOutput.innerHTML = "$" + sum;
+            numPenniesOutput.innerHTML = "Pennies: " + numPennies;
+            numNickelsOutput.innerHTML = "Nickels: " + numNickels;
+            numDimesOutput.innerHTML = "Dimes: " + numDimes;
+            numQuartersOutput.innerHTML = "Quarters: " + numQuarters;
+            pSumOutput.innerHTML = "Penny Sum: $" + pSum;
+            nSumOutput.innerHTML = "Nickel Sum: $" + nSum;
+            dSumOutput.innerHTML = "Dime Sum: $" + dSum;
+            qSumOutput.innerHTML = "Quarter Sum: $" + qSum;
         }
-        function addCoins() {
-            
+        function addCoins(val) {
+            sum += val; 
+            if (val == 0.01) {
+                pSum += val;
+                numPennies++;
+            } else if (val == 0.05) {
+                nSum += val;
+                numNickels++;
+            } else if (val == 0.1) {
+                dSum += val;
+                numDimes++;
+            } else if (val == 0.25) {
+                qSum += val;
+                numQuarters++;
+            }
             display();
+        }
+
+        function subtractCoins(val) {
+            if (val == 0.01 && numPennies > 0) {
+                numPennies--;
+                pSum -= val;
+                subtractVal(val);
+            }
+            else if (val == 0.05 && numNickels > 0) {
+                numNickels--;
+                nSum -= val;
+                subtractVal(val);
+            } else if (val == 0.1 && numDimes > 0) {
+                numDimes--;
+                dSum -= val;
+                subtractVal(val);
+            } else if (val == 0.25 && numQuarters > 0) {
+                numQuarters--;
+                qSum -= val;
+                subtractVal(val);
+            }
+            display();
+        }
+
+        function subtractVal(val) {
+            if (sum - val > 0)
+                sum -= val;
+            else
+                sum = 0;
         }
     </script>
 </head>
 <body onload="initialize();">
     <h1>Count de Money</h1>
     <h4>Bask in my riches and count my coppers and silvers and golds! Endless coins shall fall in your grasp!
-        <br>-Rich Old Man</h4>
-    <br>
-    <p id = "output">Total: </p>
-    <br>
+        <br>- Rich Old Man, probably</h4>
+    <p id = "output">$0.00</p>
     <div class="buttons">
-        <button class="button">Add 1&#162;</button>
-        <button class="button">Subtract 1&#162;</button>
-        <button class="button">Add 5&#162;</button>
-        <button class="button">Subtract 5&#162;</button>
-        <button class="button">Add 10&#162;</button>
-        <button class="button">Subtract 10&#162;</button>
-        <button class="button">Add 25&#162;</button>
-        <button class="button">Subtract 25&#162;</button>
+        <button class="button" onclick=addCoins(0.01)>Add 1&#162;</button>
+        <button class="button" onclick=subtractCoins(0.01)>Subtract 1&#162;</button>
+        <button class="button" onclick=addCoins(0.05)>Add 5&#162;</button>
+        <button class="button" onclick=subtractCoins(0.05)>Subtract 5&#162;</button>
+        <button class="button" onclick=addCoins(0.10)>Add 10&#162;</button>
+        <button class="button" onclick=subtractCoins(0.10)>Subtract 10&#162;</button>
+        <button class="button" onclick=addCoins(0.25)>Add 25&#162;</button>
+        <button class="button" onclick=subtractCoins(0.25)>Subtract 25&#162;</button>
     </div>
+    <br>
+    <div class="coinCounters">
+        <span id = "numPennies">Pennies: 0</span>
+        <span id = "numNickels">Nickels: 0</span>
+        <span id = "numDimes">Dimes: 0</span>
+        <span id = "numQuarters">Quarters: 0</span>
+    </div>
+    <br>
+    <div class="coinSums" id = "pSum">Penny Sum: $0.00</div>
+    <div class="coinSums" id = "nSum">Nickel Sum: $0.00</div>
+    <div class="coinSums" id = "dSum">Dime Sum: $0.00</div>
+    <div class="coinSums" id = "qSum">Quarter Sum: $0.00</div>
 
 </body>
 </html>
